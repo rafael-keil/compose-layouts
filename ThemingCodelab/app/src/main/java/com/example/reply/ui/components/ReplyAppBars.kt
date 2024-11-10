@@ -16,11 +16,13 @@
 
 package com.example.reply.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
@@ -30,7 +32,8 @@ import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -46,7 +49,11 @@ fun ReplySearchBar(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(
+                colorScheme.background,
+                CircleShape
+            ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -59,7 +66,7 @@ fun ReplySearchBar(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .weight(1f)
                 .padding(16.dp),
-            style = MaterialTheme.typography.bodyMedium,
+            style = typography.bodyMedium,
         )
         ReplyProfileImage(
             drawableResource = R.drawable.avatar_6,
@@ -89,14 +96,14 @@ fun EmailDetailAppBar(
             ) {
                 Text(
                     text = email.subject,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    style = typography.titleMedium,
+                    color = colorScheme.onSurfaceVariant
                 )
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
                     text = "${email.threads.size} ${stringResource(id = R.string.messages)}",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.outline
+                    style = typography.labelMedium,
+                    color = colorScheme.outline
                 )
             }
         },
@@ -106,8 +113,8 @@ fun EmailDetailAppBar(
                     onClick = onBackPressed,
                     modifier = Modifier.padding(8.dp),
                     colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.surface,
-                        contentColor = MaterialTheme.colorScheme.onSurface
+                        containerColor = colorScheme.surface,
+                        contentColor = colorScheme.onSurface
                     )
                 ) {
                     Icon(
@@ -125,7 +132,7 @@ fun EmailDetailAppBar(
                 Icon(
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = stringResource(id = R.string.more_options_button),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    tint = colorScheme.onSurfaceVariant
                 )
             }
         }

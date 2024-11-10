@@ -26,9 +26,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -49,10 +51,15 @@ fun ReplyEmailListItem(
     navigateToDetail: (Long) -> Unit
 ) {
     Card(
-        modifier =  modifier
+        modifier = modifier
             .padding(horizontal = 16.dp, vertical = 4.dp)
             .semantics { selected = isSelected }
             .clickable { navigateToDetail(email.id) },
+        colors = CardDefaults.cardColors(
+            containerColor = if (email.isImportant)
+                colorScheme.secondaryContainer
+            else colorScheme.surfaceVariant
+        )
     ) {
         Column(
             modifier = Modifier
@@ -72,9 +79,12 @@ fun ReplyEmailListItem(
                 ) {
                     Text(
                         text = email.sender.firstName,
+                        style = typography.labelMedium
                     )
                     Text(
                         text = email.createdAt,
+                        style = typography.labelMedium,
+                        color = colorScheme.onSurfaceVariant
                     )
                 }
                 IconButton(
@@ -92,10 +102,13 @@ fun ReplyEmailListItem(
 
             Text(
                 text = email.subject,
+                style = typography.titleLarge,
                 modifier = Modifier.padding(top = 12.dp, bottom = 8.dp),
             )
             Text(
                 text = email.body,
+                style = typography.bodyLarge,
+                color = colorScheme.onSurfaceVariant,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
